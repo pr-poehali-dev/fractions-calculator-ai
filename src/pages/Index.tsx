@@ -8,8 +8,10 @@ import AISolverTab from '@/components/AIsolverTab';
 import FractionCalculatorTab from '@/components/FractionCalculatorTab';
 import ExpressionCalculatorTab from '@/components/ExpressionCalculatorTab';
 import EquationsTab from '@/components/EquationsTab';
+import GraphVisualizerTab from '@/components/GraphVisualizerTab';
 import HistorySidebar from '@/components/HistorySidebar';
 import ExamplesSidebar from '@/components/ExamplesSidebar';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface HistoryItem {
   id: string;
@@ -161,17 +163,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-blue-50/30 to-purple-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-background via-blue-50/30 to-purple-50/30 dark:via-slate-900/30 dark:to-purple-900/20">
+      <ThemeToggle />
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <PageHeader />
 
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <Tabs defaultValue="ai" className="animate-scale-in">
-              <TabsList className="grid w-full grid-cols-4 mb-8 h-auto p-2 bg-card shadow-lg">
+              <TabsList className="grid w-full grid-cols-5 mb-8 h-auto p-2 bg-card shadow-lg">
                 <TabsTrigger value="ai" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   <Icon name="Sparkles" size={18} />
                   <span className="hidden sm:inline">ИИ-решатель</span>
+                </TabsTrigger>
+                <TabsTrigger value="graph" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                  <Icon name="LineChart" size={18} />
+                  <span className="hidden sm:inline">Графики</span>
                 </TabsTrigger>
                 <TabsTrigger value="fraction" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                   <Icon name="Divide" size={18} />
@@ -195,6 +202,10 @@ const Index = () => {
                   isProcessing={isProcessing}
                   handleAISolve={handleAISolve}
                 />
+              </TabsContent>
+
+              <TabsContent value="graph" className="animate-slide-in">
+                <GraphVisualizerTab />
               </TabsContent>
 
               <TabsContent value="fraction" className="animate-slide-in">
